@@ -1,19 +1,13 @@
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import time
 
-SW1 = 5
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(SW1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+SW1 = Button(5, pull_up=False )
 
 try:
     while True:
-        sw1Value = GPIO.input(SW1)
+        sw1Value = SW1.is_pressed
         print(sw1Value)
-        time.sleep(1.0)
-        
+        time.sleep(0.1)
+
 except KeyboardInterrupt:
     pass
-
-GPIO.cleanup()

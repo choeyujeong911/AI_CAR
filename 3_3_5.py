@@ -1,42 +1,27 @@
-import RPi.GPIO as GPIO
+from gpiozero import  TonalBuzzer,Button
 import time
 
-BUZZER = 12
-SW1 = 5
-SW2 = 6
-SW3 = 13
-SW4 = 19
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(BUZZER, GPIO.OUT)
-GPIO.setup(SW1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(SW2, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(SW3, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(SW4, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-
-p = GPIO.PWM(BUZZER, 216)
-p.stop()
+BUZZER = TonalBuzzer(12)
+SW1 = Button(5, pull_up=False )
+SW2 = Button(6, pull_up=False )
+SW3 = Button(13, pull_up=False )
+SW4 = Button(19, pull_up=False )
 
 try:
     while True:
-        if GPIO.input(SW1) == 1:
-            p.start(50)
-            p.ChangeFrequency(261)
-        elif GPIO.input(SW2) == 1:
-            p.start(50)
-            p.ChangeFrequency(293)
-        elif GPIO.input(SW3) == 1:
-            p.start(50)
-            p.ChangeFrequency(329)
-        elif GPIO.input(SW4) == 1:
-            p.start(50)
-            p.ChangeFrequency(349)
+        if SW1.is_pressed == True:
+            BUZZER.play(261)
+        elif SW2.is_pressed == True:
+            BUZZER.play(293)
+        elif SW3.is_pressed == True:
+            BUZZER.play(329)
+        elif SW4.is_pressed == True:
+            BUZZER.play(349)
         else:
-            p.stop()
+            BUZZER.stop()
             
+        
 except KeyboardInterrupt:
     pass
 
-p.stop()
-GPIO.cleanup()
+BUZZER.stop()

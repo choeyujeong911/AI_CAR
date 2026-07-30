@@ -1,44 +1,34 @@
-import RPi.GPIO as GPIO
+from gpiozero import  TonalBuzzer,Button
 import time
 
-BUZZER = 12
-SW1 = 5
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(BUZZER, GPIO.OUT)
-GPIO.setup(SW1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-
-p = GPIO.PWM(BUZZER, 391)
-p.stop()
+BUZZER = TonalBuzzer(12)
+SW1 = Button(5, pull_up=False )
 
 oldSw = 0
 newSw = 0
 
 try:
     while True:
-        newSw = GPIO.input(SW1)
+        newSw = SW1.is_pressed
         if newSw != oldSw:
             oldSw = newSw
+            
             if newSw == 1:
-                p.start(50)
-                p.ChangeFrequency(391)
+                BUZZER.play(391)
                 time.sleep(0.2)
                 
-                p.stop()
+                BUZZER.stop()
                 time.sleep(0.1)
                 
-                p.start(50)
-                p.ChangeFrequency(391)
+                BUZZER.play(391)
                 time.sleep(0.2)
                 
-                p.stop()
+                BUZZER.stop()
                 time.sleep(0.1)
-                
+            
             time.sleep(0.2)
         
 except KeyboardInterrupt:
     pass
 
-p.stop()
-GPIO.cleanup()
+BUZZER.stop()

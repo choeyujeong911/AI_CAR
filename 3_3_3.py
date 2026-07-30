@@ -1,35 +1,28 @@
-import RPi.GPIO as GPIO
+from gpiozero import  TonalBuzzer
 import time
 
-BUZZER = 12
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(BUZZER, GPIO.OUT)
-
-p = GPIO.PWM(BUZZER, 391)
-p.start(50)
+BUZZER = TonalBuzzer(12)
 
 try:
     while True:
-        p.start(50)
-        p.ChangeFrequency(391)
-        time.sleep(1.0)
-        p.stop()
-        time.sleep(1.0)
+        BUZZER.play(391)
+        time.sleep(0.2)
         
-        p.start(50)
-        p.ChangeFrequency(391)
-        time.sleep(1.0)
+        BUZZER.stop()
+        time.sleep(0.1)
         
-        p.stop()
-        time.sleep(1.0)
+        BUZZER.play(391)
+        time.sleep(0.2)
         
-        p.stop()
+        BUZZER.stop()
+        time.sleep(0.1)
+        
+        BUZZER.stop()
         time.sleep(2.0)
-        
+
 except KeyboardInterrupt:
     pass
 
-p.stop()
-GPIO.cleanup()
+BUZZER.stop()
+
+

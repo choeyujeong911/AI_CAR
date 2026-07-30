@@ -1,28 +1,23 @@
+import mycamera
 import cv2
-import numpy as np
-
-pl = (
-    "libcamerasrc ! video/x-raw,format=NV12,width=160,height=120,framerate=20/1 !"
-    "videoconvert ! video/x-raw,format=BGR ! appsink drop=1 sync=false"
-)
 
 def main():
-    camera = cv2.VideoCapture(pl)
-    camera.set(3, 160)
-    camera.set(4, 120)
-    
-    while(camera.isOpened()):
-        ret, frame = camera.read()
-        frame = cv2.flip(frame, -1)
-        cv2.imshow('normal', frame)
+    camera = mycamera.MyPiCamera(320,240)
 
-        crop_img = frame[60:120, 0:160]
-        cv2.imshow('crop', crop_img)
+    while( camera.isOpened() ):
+        _, image = camera.read()
+        image = cv2.flip(image,-1)
+        cv2.imshow('normal',image)
+        
+        height, width, _ = image.shape
+        print(height,width)
+        crop_img = image[height //2 :, :]
+        cv2.imshow('crop',crop_img)
         
         if cv2.waitKey(1) == ord('q'):
             break
-        
-    cv2.destroyAllWindows()
     
+    cv2.destroyAllWindows()
+
 if __name__ == '__main__':
     main()

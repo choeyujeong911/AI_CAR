@@ -1,42 +1,34 @@
-import RPi.GPIO as GPIO
+from gpiozero import DigitalOutputDevice
+from gpiozero import PWMOutputDevice
 import time
 
-PWMA = 18
-AIN1 = 22
-AIN2 = 27
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(PWMA, GPIO.OUT)
-GPIO.setup(AIN1, GPIO.OUT)
-GPIO.setup(AIN2, GPIO.OUT)
-
-L_Motor = GPIO.PWM(PWMA, 500)
-L_Motor.start(0)
+PWMA = PWMOutputDevice(18)
+AIN1 = DigitalOutputDevice(22)
+AIN2 = DigitalOutputDevice(27)
 
 try:
     while True:
-        GPIO.output(AIN1, 0)
-        GPIO.output(AIN2, 1)
-        L_Motor.ChangeDutyCycle(10)
+        AIN1.value = 0
+        AIN2.value = 1
+        PWMA.value = 0.1 # 0.0~1.0 speed
         time.sleep(1.0)
         
-        GPIO.output(AIN1, 0)
-        GPIO.output(AIN2, 1)
-        L_Motor.ChangeDutyCycle(50)
+        AIN1.value = 0
+        AIN2.value = 1
+        PWMA.value = 0.5 # 0.0~1.0 speed
         time.sleep(1.0)
         
-        GPIO.output(AIN1, 0)
-        GPIO.output(AIN2, 1)
-        L_Motor.ChangeDutyCycle(100)
+        AIN1.value = 0
+        AIN2.value = 1
+        PWMA.value = 1.0 # 0.0~1.0 speed
         time.sleep(1.0)
         
-        GPIO.output(AIN1, 0)
-        GPIO.output(AIN2, 1)
-        L_Motor.ChangeDutyCycle(0)
+        AIN1.value = 0
+        AIN2.value = 1
+        PWMA.value = 0.0 # 0.0~1.0 speed
         time.sleep(1.0)
         
 except KeyboardInterrupt:
     pass
 
-GPIO.cleanup()
+PWMA.value = 0.0

@@ -1,18 +1,16 @@
-import RPi.GPIO as GPIO
+from gpiozero import LED
 import time
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(26, GPIO.OUT)
+led1 = LED(26)
 
 try:
     while True:
-        GPIO.output(26, GPIO.HIGH)
+        led1.on()
         time.sleep(1.0)
-        GPIO.output(26, GPIO.LOW)
+        led1.off()
         time.sleep(1.0)
-        
+
 except KeyboardInterrupt:
     pass
 
-GPIO.cleanup()
+led1.off()

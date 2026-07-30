@@ -1,36 +1,25 @@
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import time
 
-SW1 = 5
-SW2 = 6
-SW3 = 13
-SW4 = 19
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(SW1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(SW2, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(SW3, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(SW4, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+SW1 = Button(5, pull_up=False )
+SW2 = Button(6, pull_up=False )
+SW3 = Button(13, pull_up=False )
+SW4 = Button(19, pull_up=False )
 
 try:
     while True:
-        if GPIO.input(SW1) == 1:
-            print(" go ")
-        elif GPIO.input(SW2) == 1:
-            print(" right ")
-        elif GPIO.input(SW3) == 1:
-            print(" left ")
-        elif GPIO.input(SW4) == 1:
-            print(" back ")
+        if SW1.is_pressed == True:
+            print("go")
+        elif SW2.is_pressed == True:
+            print("right")
+        elif SW3.is_pressed == True:
+            print("left")
+        elif SW4.is_pressed == True:
+            print("back")
         else:
-            print(" stop ")
-            
-        time.sleep(0.1)
+            print("stop")
         
+        time.sleep(0.1)
+            
 except KeyboardInterrupt:
     pass
-
-GPIO.cleanup()
-
-

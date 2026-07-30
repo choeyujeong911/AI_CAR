@@ -4,7 +4,7 @@ import time
 
 bleSerial = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1.0)
 
-gData = " "
+gData = ""
 
 def serial_thread():
     global gData
@@ -12,13 +12,14 @@ def serial_thread():
         data = bleSerial.readline()
         data = data.decode()
         gData = data
-        
+
 def main():
     global gData
     try:
         while True:
-            print("serial data", gData)
+            print("serial data:",gData)
             time.sleep(1.0)
+
     except KeyboardInterrupt:
         pass
 
@@ -27,3 +28,4 @@ if __name__ == '__main__':
     task1.start()
     main()
     bleSerial.close()
+    

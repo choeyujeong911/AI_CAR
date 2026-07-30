@@ -6,7 +6,7 @@ bleSerial = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=1.0)
 try:
     while True:
         sendData = "I am raspberry \r\n"
-        bleSerial.write(sendData.encode())
+        bleSerial.write( sendData.encode() )
         time.sleep(1.0)
         
 except KeyboardInterrupt:

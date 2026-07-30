@@ -12,7 +12,7 @@ def serial_thread():
         data = bleSerial.readline()
         data = data.decode()
         gData = data
-        
+
 def main():
     global gData
     try:
@@ -32,7 +32,7 @@ def main():
             elif gData.find("stop") >= 0:
                 gData = ""
                 print("ok stop")
-                
+
     except KeyboardInterrupt:
         pass
 
@@ -41,3 +41,5 @@ if __name__ == '__main__':
     task1.start()
     main()
     bleSerial.close()
+    
+

@@ -17,7 +17,10 @@ try:
         elif data.find("stop") >= 0:
             print("ok stop")
         
+        
 except KeyboardInterrupt:
     pass
 
 bleSerial.close()
+
+

@@ -1,21 +1,28 @@
-import RPi.GPIO as GPIO
+from gpiozero import LED
 import time
 
-LED1 = 26
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED1, GPIO.OUT)
+led1 = LED(26)
+led2 = LED(16)
+led3 = LED(20)
+led4 = LED(21)
 
 try:
     while True:
-        GPIO.output(LED1, GPIO.HIGH)
+        led1.on()
+        led2.on()
+        led3.on()
+        led4.on()
         time.sleep(1.0)
-        GPIO.output(LED1, GPIO.LOW)
+        led1.off()
+        led2.off()
+        led3.off()
+        led4.off()
         time.sleep(1.0)
-        
+
 except KeyboardInterrupt:
     pass
 
-GPIO.cleanup()
-
+led1.off()
+led2.off()
+led3.off()
+led4.off()
