@@ -1,10 +1,11 @@
 import mycamera
 import cv2
 import time
+from pathlib import Path
 
 def main():
     camera = mycamera.MyPiCamera(640,480)
-    filepath = "/home/pi/AI_CAR/video/test"
+    filepath = f"{Path.home()}/AI_CAR/video/test"
     i = 0
     
     while( camera.isOpened() ):

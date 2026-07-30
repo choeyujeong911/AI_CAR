@@ -2,6 +2,7 @@ import threading
 import time
 import mycamera
 import cv2
+from pathlib import Path
 
 # Pretrained classes in the model
 classNames = {0: 'background',
@@ -40,8 +41,8 @@ def opencvdnn_thread():
     global image,imagednn
     global image_ok,image_find_ok
     
-    model = cv2.dnn.readNetFromTensorflow('/home/pi/AI_CAR/OpencvDnn/models/frozen_inference_graph.pb',
-                                      '/home/pi/AI_CAR/OpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
+    model = cv2.dnn.readNetFromTensorflow(f'{Path.home()}/AI_CAR/OpencvDnn/models/frozen_inference_graph.pb',
+                                      f'{Path.home()}/AI_CAR/OpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
 
     while True:
         if image_ok == 1:

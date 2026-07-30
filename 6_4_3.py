@@ -3,6 +3,7 @@ import cv2
 import time
 from gpiozero import DigitalOutputDevice
 from gpiozero import PWMOutputDevice
+from pathlib import Path
 
 PWMA = PWMOutputDevice(18)
 AIN1 = DigitalOutputDevice(22)
@@ -56,7 +57,7 @@ speedSet = 0.5
 
 def main():
     camera = mycamera.MyPiCamera(640,480)
-    filepath = "/home/pi/AI_CAR/video/train"
+    filepath = f"{Path.home()}/AI_CAR/video/train"
     i = 0
     carState = "stop"
     while( camera.isOpened() ):

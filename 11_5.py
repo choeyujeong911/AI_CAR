@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 from gpiozero import DigitalOutputDevice
 from gpiozero import PWMOutputDevice
+from pathlib import Path
 
 PWMA = PWMOutputDevice(18)
 AIN1 = DigitalOutputDevice(22)
@@ -109,8 +110,8 @@ def opencvdnn_thread():
     global image_ok,image_find_ok
     global box_size
     global carState
-    model = cv2.dnn.readNetFromTensorflow('/home/pi/AI_CAR/OpencvDnn/models/frozen_inference_graph.pb',
-                                      '/home/pi/AI_CAR/OpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
+    model = cv2.dnn.readNetFromTensorflow(f'{Path.home()}/AI_CAR/OpencvDnn/models/frozen_inference_graph.pb',
+                                      f'{Path.home()}/AI_CAR/OpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
     while True:
         if image_ok == 1:
             imagednn = image

@@ -1,6 +1,7 @@
 import mycamera
 import cv2
 import time
+from pathlib import Path
 
 def main():
     camera = mycamera.MyPiCamera(640,480)
@@ -16,7 +17,7 @@ def main():
         image = cv2.flip(image,-1)
         cv2.imshow('Original', image)
         
-        cv2.imwrite("/home/pi/AI_CAR/video/test.png" , image)
+        cv2.imwrite(f"{Path.home()}/AI_CAR/video/test.png" , image)
         
         time.sleep(1.0)
             

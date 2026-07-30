@@ -1,5 +1,6 @@
 import mycamera
 import cv2
+from pathlib import Path
 
 classNames = {0: 'background',
               1: 'person', 2: 'bicycle', 3: 'car', 4: 'motorcycle', 5: 'airplane', 6: 'bus',
@@ -28,8 +29,8 @@ camera = mycamera.MyPiCamera(640,480)
 
 def main():
     try:
-        model = cv2.dnn.readNetFromTensorflow('/home/pi/AI_CAR/OpencvDnn/models/frozen_inference_graph.pb',
-                                      '/home/pi/AI_CAR/OpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
+        model = cv2.dnn.readNetFromTensorflow(f'{Path.home()}/AI_CAR/OpencvDnn/models/frozen_inference_graph.pb',
+                                      f'{Path.home()}/AI_CAR/OpencvDnn/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
         while True:
             keyValue = cv2.waitKey(1)
         

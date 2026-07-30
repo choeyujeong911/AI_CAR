@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+from pathlib import Path
 
 def img_preprocess(image):
     height, _, _ = image.shape
@@ -15,7 +16,7 @@ def img_preprocess(image):
 
 def main():
     camera = mycamera.MyPiCamera(640,480)
-    model_path = '/home/pi/AI_CAR/model/lane_navigation_final.keras'
+    model_path = f'{Path.home()}/AI_CAR/model/lane_navigation_final.keras'
     model = load_model(model_path)
     
     carState = "stop"
