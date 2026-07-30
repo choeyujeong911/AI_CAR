@@ -12,3 +12,5 @@ sudo sed -i \
 
 sudo apt clean
 sudo apt update
+
+rm ~/AI_CAR/video/test.txt
