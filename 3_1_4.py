@@ -31,4 +31,3 @@ except KeyboardInterrupt:
 
 GPIO.cleanup()
 
-
