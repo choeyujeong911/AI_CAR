@@ -1,7 +1,7 @@
 from gpiozero import Button
 import time
 
-SW1 = Button(5, pull_up=False )
+SW1 = Button(5, pull_up=False)
 
 oldSw = 0
 newSw = 0
@@ -13,7 +13,7 @@ try:
         if newSw != oldSw:
             oldSw = newSw
             cnt = cnt + 1
-            print("click",cnt)
+            print("click", cnt)
             time.sleep(0.2)
 
 except KeyboardInterrupt:

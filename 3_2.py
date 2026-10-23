@@ -1,7 +1,7 @@
 from gpiozero import Button
 import time
 
-SW1 = Button(5, pull_up=False )
+SW1 = Button(5, pull_up=False)
 
 try:
     while True:
